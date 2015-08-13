@@ -149,6 +149,12 @@ Nav
 	color: white;
 }
 
+.nav iframe {
+	width: 90px;
+	float: right;
+	margin: 0 -40px 0 0; 
+}
+
 /* -----------------------
 Single styles
 ------------------------*/
@@ -228,7 +234,7 @@ Wide styles
 	.header { padding: 1.5em 3em; }
 	.nav-bar { padding: 1em 3em; }
 	.content { padding: 2em 3em; }
-	.footer { padding: 2em 3em; }
+	.footer { padding: 1em 2em; }
 	
 	.nav li
 	{
