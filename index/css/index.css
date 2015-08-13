@@ -121,6 +121,7 @@ Nav
 	margin: 0;
 }
 
+
 .nav a
 {
 	display: block;
@@ -135,20 +136,17 @@ Nav
 
 .nav a:focus
 {
-	color: black;
-	background-color: white;
+	color: blue;
 }
 
 .nav a:hover
 {
 	color: white;
-	background-color: green;
 }
 
 .nav a:active
 {
 	color: white;
-	background-color: red;
 }
 
 /* -----------------------
