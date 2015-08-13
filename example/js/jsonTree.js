@@ -34,12 +34,6 @@ function jsonTree(jsonURL, selector) {
 	
 		});
 
-        // What are you doing here?
-		list_parents.forEach(function(ele, i, a){
-			ele.addEventListener('click', function() {
-				 var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
-			});
-		});
 	});
 
 }
