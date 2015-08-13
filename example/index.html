@@ -1,15 +1,19 @@
 <html>
 <head>
 <title> jsonTree example </title>
-<link rel='stylesheet' type='text/css' href='css/jsonTree.css'>
+<link rel='stylesheet' type='text/css' href='../dist/css/jsonTree.css'>
 </head>
 <body>
+<form id="frm1">
+  JSON URL: <input type="url" name="url" id="json"><br>
+  <input type="button" onclick="jsonTree(document.getElementById('json').value, '#testing')" value="Execute">
+</form>
+
 <div id='testing'>
 </div>
-<script src="js/jsonTree.js"></script>
-<script type='text/javascript'>
-		jsonTree('http://www.knightos.org/documentation/reference/data.json', '#testing');
-</script>
+
+<script src="../dist/js/jsonTree.js"></script>
+
 </body>
 
 </html>
