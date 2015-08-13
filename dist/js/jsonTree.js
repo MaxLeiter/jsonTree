@@ -41,32 +41,6 @@ function toArray(o) {
 	return Array.prototype.slice.call(o);
 }
 
-function slide(elementId) {
-	var slider = document.getElementById(elementId);
-	slider.style.height = minheight + 'px';
-		clearInterval(timer);
-		var instanceheight = parseInt(slider.style.height);
-		var instanceopacity = slider.style.opacity;
-		var init = (new Date()).getTime();
-		var height = (toggled = !toggled) ? maxheight: minheight;
-		var disp = height - parseInt(slider.style.height);
-		timer = setInterval(function() {
-			var instance = (new Date()).getTime() - init;
-			if(instance < time ) {
-				var con = instance / time;
-				var pos = Math.floor(disp * con);
-				result = instanceheight + pos;
-				slider.style.height =  result + 'px';
-				if(toggled) {
-      				slider.style.opacity = opacity * con;
-  				}
-			} else {
-        		slider.style.height = height + 'px';
-        		slider.style.opacity = opacity;
-        		clearInterval(timer);
-   			}
-	},1);
-}
 function json2html(json) {
     var i, html = "";
     html += "<ul id='top'>";
