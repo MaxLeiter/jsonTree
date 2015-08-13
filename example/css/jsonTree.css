@@ -1,32 +1,5 @@
-.listContainer{
-  margin-top:15px;
-}
 
-.expList ul, li {
-    list-style: none;
-    margin:0;
-    padding:0;
-    cursor: pointer;
-}
-.expList p {
-    margin:0;
-    display:block;
-}
-.expList p:hover {
-    background-color:#121212;
-}
-.expList li {
-    line-height:140%;
-    text-indent:0px;
-    background-position: 1px 8px;
-    padding-left: 20px;
-    background-repeat: no-repeat;
-}
+ul>li>ul {display:none;}
 
-.expList .collapsed {
-    content: '<';
-}
+ul>li.selected>ul{display:block;}
 
-.expList .expanded {
-    content: '>';
-}

@@ -1,14 +1,10 @@
-function jsonTree() {
-	console.log('heyy');
-}
-
 function jsonTree(jsonURL, selector) {
 
 	var element = document.querySelector(selector);
-	if(element.className.indexOf('listContainer') == -1) {
-		console.log('listContainer not found!');
-	}
+	if(!element)
+		console.log('jsonTree element not found!');
 
+	element.classList.add('jsonTree');
 	var request = new XMLHttpRequest();
 	request.open("GET", jsonURL, true);
 	request.send();
@@ -16,35 +12,73 @@ function jsonTree(jsonURL, selector) {
 	request.addEventListener('load', function() {
 		var parsed = JSON.parse(request.responseText);
 		element.innerHTML = json2html(parsed);
-		var parent = element.getElementsByTagName('ul');
-		if(parent)
-			parent[0].className = 'expList';
 
-		var children = [].slice.call(document.querySelectorAll('ul')).filter(function (el) { return el.querySelector('li'); });
-		console.log(children);
-		//var children = parent.getElementsByTagName('li:has(ul)');
-		for(var i = 0; i < children.length; i++) {
-			children[i].addEventListener('click', function(e) {
-					console.log('yeah it is');
-					toggleClass(children[i], 'expanded');
-			});
-			if (children[i].classList)
-				children[i].classList.add('collapsed');
-			else
-				children[i].className += ' ' + 'collapsed';
-			var tempChildren = children[i].getElementsByTagName('ul');
-			for(var i = 0; i < tempChildren.length; i++) {
-				tempChildren[i].style.display = 'none';
+		top = document.getElementById('top');
+		top.addEventListener('click', function(e) {
+			e.preventDefault();
+			if(e.target && e.target.nodeName == "LI") {
+				toggleClass(e.target, 'selected');
+				console.log('je');
 			}
-		};
-	});
 
+		});
+		var parents = toArray(document.querySelectorAll(selector + ' li'));
+		parents.forEach(function(ele, i, a){
+			    var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
+				if(filter.length > 0) {
+					if (ele.classList)
+						ele.classList.add('parent');
+					else
+						ele.className += ' ' + 'parent';
+				}
+	
+		});
+
+        // What are you doing here?
+		list_parents.forEach(function(ele, i, a){
+			ele.addEventListener('click', function() {
+				 var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
+			});
+		});
+	});
 
 }
 
+function toArray(o) {
+	return Array.prototype.slice.call(o);
+}
+
+
+
+function slide(elementId) {
+	var slider = document.getElementById(elementId);
+	slider.style.height = minheight + 'px';
+		clearInterval(timer);
+		var instanceheight = parseInt(slider.style.height);
+		var instanceopacity = slider.style.opacity;
+		var init = (new Date()).getTime();
+		var height = (toggled = !toggled) ? maxheight: minheight;
+		var disp = height - parseInt(slider.style.height);
+		timer = setInterval(function() {
+			var instance = (new Date()).getTime() - init;
+			if(instance < time ) {
+				var con = instance / time;
+				var pos = Math.floor(disp * con);
+				result = instanceheight + pos;
+				slider.style.height =  result + 'px';
+				if(toggled) {
+      				slider.style.opacity = opacity * con;
+  				}
+			} else {
+        		slider.style.height = height + 'px';
+        		slider.style.opacity = opacity;
+        		clearInterval(timer);
+   			}
+	},1);
+}
 function json2html(json) {
     var i, html = "";
-    html += "<ul>";
+    html += "<ul id='top'>";
     for (i in json) {
         html += "<li>"+i+": ";
         if(typeof json[i] === "object") html += json2html(json[i]);
@@ -52,17 +86,17 @@ function json2html(json) {
         html += "</li>";
     }
     html += "</ul>";
+
     return html;
 }
 
 
 function toggleClass(el, className) {
 	if(el) {
-		if(el.className.indexOf(className)) {
-			el.className = el.className.replace(className, '');
-		}
-		else {
-			el.className += ' ' + className;
-		}
+		el.classList.toggle(className);
 	}
 };
+
+function toArray(arrayLike) {
+    return Array.prototype.slice.call(arrayLike);
+}
