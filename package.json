@@ -1,7 +1,7 @@
 {
   "name": "jsontreejs",
   "version": "1.0.0",
-  "description": "a lightweight dependency free javascript framework",
+  "description": "a lightweight dependency free javascript micro-library",
   "main": "dist/jsonTree.js",
   "directories": {
     "example": "example"

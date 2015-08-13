@@ -8,7 +8,6 @@ function jsonTree(jsonURL, selector) {
 	var request = new XMLHttpRequest();
 	request.open("GET", jsonURL, true);
 	request.send();
-	console.log('request sent');
 	request.addEventListener('load', function() {
 		var parsed = JSON.parse(request.responseText);
 		element.innerHTML = json2html(parsed);
@@ -18,7 +17,6 @@ function jsonTree(jsonURL, selector) {
 			e.preventDefault();
 			if(e.target && e.target.nodeName == "LI") {
 				toggleClass(e.target, 'selected');
-				console.log('je');
 			}
 
 		});
