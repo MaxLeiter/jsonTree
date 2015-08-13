@@ -53,13 +53,8 @@ function json2html(json) {
     return html;
 }
 
-
 function toggleClass(el, className) {
 	if(el) {
 		el.classList.toggle(className);
 	}
 };
-
-function toArray(arrayLike) {
-    return Array.prototype.slice.call(arrayLike);
-}
