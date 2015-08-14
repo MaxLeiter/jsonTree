@@ -100,8 +100,8 @@ Layout styles
 .footer
 {
 	color: #fff;
-	background: #000;
-	padding: 1em 1.25em;
+	background: #999;
+	padding: 0;
 }
 
 /* -----------------------
@@ -234,14 +234,14 @@ Wide styles
 	.header { padding: 1.5em 3em; }
 	.nav-bar { padding: 1em 3em; }
 	.content { padding: 2em 3em; }
-	.footer { padding: 1em 2em; }
-	
+	.footer { padding: .2em .2em }
+
 	.nav li
 	{
 		display: inline;
 		margin: 0 1em 0 0;
 	}
-	
+
 	.nav a
 	{
 		display: inline;
