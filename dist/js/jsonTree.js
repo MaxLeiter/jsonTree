@@ -21,41 +21,29 @@ function jsonTree(jsonURL, selector) {
 				}
 			}
 		});
-		var liParents = toArray(document.querySelectorAll(selector + ' li'));
-		liParents.forEach(function(ele, i, a){
-			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
-				if(filter.length > 0) { //its a parent!
-					if (ele.classList) {
-						ele.classList.add('parent');
-					}
-					else {
-						ele.className += ' ' + 'parent';
-					}
-					if(ele.classList.contains('parent')) {
-						ele.style.cursor = 'pointer';
-					}
-				} else {
-					ele.style.cursor = 'auto';
-				}
-			});
-		var ulParents = toArray(document.querySelectorAll(selector + ' ul'));
-		ulParents.forEach(function(ele, i, a){
-			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'li'; });
-				if(filter.length > 0) { //its a parent!
-					if (ele.classList) {
-						ele.classList.add('parent');
-					}
-					else {
-						ele.className += ' ' + 'parent';
-					}
-					if(ele.classList.contains('parent')) {
-						ele.style.cursor = 'pointer';
-					}
-				} else {
-					ele.style.cursor = 'auto';
-				}
-			});
+		applyParent(selector, 'li', 'ul');
+		applyParent(selector, 'ul', 'li');
 	});
+}
+
+function applyParent(selector, parent, child) {
+	var parents = toArray(document.querySelectorAll(selector + ' ' + parent));
+	parents.forEach(function(ele, i, a){
+		var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == child; });
+			if(filter.length > 0) { //its a parent!
+				if (ele.classList) {
+					ele.classList.add('parent');
+				}
+				else {
+					ele.className += ' ' + 'parent';
+				}
+				if(ele.classList.contains('parent')) {
+					ele.style.cursor = 'pointer';
+				}
+			} else {
+				ele.style.cursor = 'auto';
+			}
+		});
 }
 
 function toArray(o) {
