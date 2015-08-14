@@ -104,6 +104,9 @@ Layout styles
 	padding: 0;
 }
 
+.footer a {
+	text-decoration: none;
+}
 /* -----------------------
 Nav
 ------------------------*/
