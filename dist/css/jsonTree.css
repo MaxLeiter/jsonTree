@@ -2,7 +2,3 @@
 ul>li>ul {display:none;}
 
 ul>li.selected>ul{display:block;}
-
-.parent {
-	cursor: 'pointer';
-}
