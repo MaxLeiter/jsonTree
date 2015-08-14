@@ -12,23 +12,39 @@ function jsonTree(jsonURL, selector) {
 	request.addEventListener('load', function() {
 		var parsed = JSON.parse(request.responseText);
 		element.innerHTML = json2html(parsed);
-		top = document.getElementById('top');
+		top = document.querySelectorAll('#top');
 		top.addEventListener('click', function(e) {
 			e.preventDefault();
 			if(e.target && e.target.nodeName == "LI") {
-				toggleClass(e.target, 'selected');
+				if(toArray(e.target.childNodes).length > 1) {
+					toggleClass(e.target, 'selected');
+				}
 			}
 		});
-		var parents = toArray(document.querySelectorAll(selector + ' li'));
-		parents.forEach(function(ele, i, a){
+		var liParents = toArray(document.querySelectorAll(selector + ' li'));
+		liParents.forEach(function(ele, i, a){
 			    var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
-				if(filter.length > 0) {
+				if(filter.length > 0) { //its a parent!
 					if (ele.classList) {
 						ele.classList.add('parent');
 					}
 					else {
 						ele.className += ' ' + 'parent';
 					}
+					ele.style.cursor = 'pointer';
+				}
+		});
+		var ulParents = toArray(document.querySelectorAll(selector + ' ul'));
+		ulParents.forEach(function(ele, i, a){
+			    var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'li'; });
+				if(filter.length > 0) { //its a parent!
+					if (ele.classList) {
+						ele.classList.add('parent');
+					}
+					else {
+						ele.className += ' ' + 'parent';
+					}
+					ele.style.cursor = 'pointer';
 				}
 		});
 	});
