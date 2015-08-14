@@ -64,9 +64,9 @@ th, td
 }
 
 a:link { color: #4169e1; } /** Royalblue**/
-a:visited { color: purple; }
+a:visited { color: #4169e1; } /** Royalblue**/
 a:focus { color: black; }
-a:hover { color: green; }
+a:hover { color: purple; }
 a:active { color: red; }
 
 /* -----------------------
