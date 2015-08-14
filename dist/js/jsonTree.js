@@ -23,7 +23,7 @@ function jsonTree(jsonURL, selector) {
 		});
 		var liParents = toArray(document.querySelectorAll(selector + ' li'));
 		liParents.forEach(function(ele, i, a){
-			    var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
+			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'ul'; });
 				if(filter.length > 0) { //its a parent!
 					if (ele.classList) {
 						ele.classList.add('parent');
@@ -31,12 +31,16 @@ function jsonTree(jsonURL, selector) {
 					else {
 						ele.className += ' ' + 'parent';
 					}
-					ele.style.cursor = 'pointer';
+					if(ele.classList.contains('parent')) {
+						ele.style.cursor = 'pointer';
+					}
+				} else {
+					ele.style.cursor = 'auto';
 				}
-		});
+			});
 		var ulParents = toArray(document.querySelectorAll(selector + ' ul'));
 		ulParents.forEach(function(ele, i, a){
-			    var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'li'; });
+			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == 'li'; });
 				if(filter.length > 0) { //its a parent!
 					if (ele.classList) {
 						ele.classList.add('parent');
@@ -44,9 +48,13 @@ function jsonTree(jsonURL, selector) {
 					else {
 						ele.className += ' ' + 'parent';
 					}
-					ele.style.cursor = 'pointer';
+					if(ele.classList.contains('parent')) {
+						ele.style.cursor = 'pointer';
+					}
+				} else {
+					ele.style.cursor = 'auto';
 				}
-		});
+			});
 	});
 }
 
@@ -55,18 +63,18 @@ function toArray(o) {
 }
 
 function json2html(json) {
-    var i, html = "";
-    html += "<ul id='top'>";
-    for (i in json) {
-        html += "<li>"+i+": ";
-        if(typeof json[i] === "object") {
-        	html += json2html(json[i]);
-        }
-        else html += json[i];
-        html += "</li>";
-    }
-    html += "</ul>";
-    return html;
+	var i, html = "";
+	html += "<ul id='top'>";
+	for (i in json) {
+		html += "<li>"+i+": ";
+		if(typeof json[i] === "object") {
+			html += json2html(json[i]);
+		}
+		else html += json[i];
+		html += "</li>";
+	}
+	html += "</ul>";
+	return html;
 }
 
 function toggleClass(el, className) {
