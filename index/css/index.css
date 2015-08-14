@@ -63,7 +63,7 @@ th, td
 	border-bottom: 1px solid #ddd;
 }
 
-a:link { color: royalblue; }
+a:link { color: #4169e1; } /** Royalblue**/
 a:visited { color: purple; }
 a:focus { color: black; }
 a:hover { color: green; }
@@ -106,6 +106,7 @@ Layout styles
 
 .footer a {
 	text-decoration: none;
+	color: white;
 }
 /* -----------------------
 Nav
@@ -155,7 +156,7 @@ Nav
 .nav iframe {
 	width: 90px;
 	float: right;
-	margin: 0 -40px 0 0; 
+	margin: 0 -40px 0 0;
 }
 
 /* -----------------------
