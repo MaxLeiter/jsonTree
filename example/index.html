@@ -6,7 +6,7 @@
 <body>
 <form id="frm1">
   JSON URL: <input type="url" name="url" id="json"><br>
-  <input type="button" onclick="jsonTree(document.getElementById('json').value, '#testing', 'false')" value="Execute">
+  <input type="button" id='exec' value="Execute">
 </form>
 
 <div id='testing'>
@@ -14,6 +14,12 @@
 
 <script src="../dist/js/jsonTree.js"></script>
 <script type='text/javascript'>
+var button = document.querySelector('#exec');
+button.addEventListener('click', function(e) {
+	e.preventDefault();
+	jsonTree(document.getElementById('json').value, '#testing', false);
+});
+
 document.getElementById('json').value = 'http://www.knightos.org/documentation/reference/data.json';
 </script>
 
