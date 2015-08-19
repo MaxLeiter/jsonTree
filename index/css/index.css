@@ -238,18 +238,21 @@ Form
     padding: 20px 12px 10px 20px;
     font: 13px sans-serif;
 }
+
 .form-style li {
     padding: 0;
     display: block;
     list-style: none;
     margin: 10px 0 0 0;
 }
+
 .form-style label {
     margin:0 0 3px 0;
     padding:0px;
     display:block;
     font-weight: bold;
 }
+
 .form-style input[type=text], 
 .form-style input[type=date],
 .form-style input[type=datetime],
@@ -272,6 +275,7 @@ select {
     -o-transition: all 0.30s ease-in-out;
     outline: none;  
 }
+
 .form-style input[type=text]:focus, 
 .form-style input[type=date]:focus,
 .form-style input[type=datetime]:focus,
@@ -294,24 +298,32 @@ select {
 .form-style .field-long {
     width: 100%;
 }
+
 .form-style .field-select {
     width: 100%;
 }
+
 .form-style .field-textarea {
     height: 100px;
 }
+
 .form-style input[type=submit], .form-style input[type=button] {
     background: #4B99AD;
     padding: 8px 15px 8px 15px;
     border: none;
     color: #fff;
+    cursor: pointer;
+
 }
+
 .form-style input[type=submit]:hover, .form-style input[type=button]:hover {
     background: #4691A4;
     box-shadow:none;
     -moz-box-shadow:none;
     -webkit-box-shadow:none;
+    cursor: pointer;
 }
+
 .form-style .required {
     color:red;q
 }
