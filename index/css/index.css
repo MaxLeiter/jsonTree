@@ -63,8 +63,8 @@ th, td
 	border-bottom: 1px solid #ddd;
 }
 
-a:link { color: #4169e1; } /** Royalblue**/
-a:visited { color: #4169e1; } /** Royalblue**/
+a:link { color: #4169e1; } /** Royalblue **/
+a:visited { color: #4169e1; } /** Royalblue **/
 a:focus { color: black; }
 a:hover { color: purple; }
 a:active { color: red; }
@@ -227,6 +227,93 @@ Single styles
 	display: inline-block;
 	padding-right: 5px;
 	padding-left: 5px;
+}
+
+/* -----------------------
+Form
+------------------------*/
+.form-style {
+    margin:10px auto;
+    max-width: 400px;
+    padding: 20px 12px 10px 20px;
+    font: 13px sans-serif;
+}
+.form-style li {
+    padding: 0;
+    display: block;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+.form-style label {
+    margin:0 0 3px 0;
+    padding:0px;
+    display:block;
+    font-weight: bold;
+}
+.form-style input[type=text], 
+.form-style input[type=date],
+.form-style input[type=datetime],
+.form-style input[type=number],
+.form-style input[type=search],
+.form-style input[type=time],
+.form-style input[type=url],
+.form-style input[type=email],
+textarea, 
+select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border:1px solid #BEBEBE;
+    padding: 7px;
+    margin:0px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;  
+}
+.form-style input[type=text]:focus, 
+.form-style input[type=date]:focus,
+.form-style input[type=datetime]:focus,
+.form-style input[type=number]:focus,
+.form-style input[type=search]:focus,
+.form-style input[type=time]:focus,
+.form-style input[type=url]:focus,
+.form-style input[type=email]:focus,
+.form-style textarea:focus, 
+.form-style select:focus 
+    -moz-box-shadow: 0 0 8px #88D5E9;
+    -webkit-box-shadow: 0 0 8px #88D5E9;
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+}
+.form-style .field-divided {
+    width: 49%;
+}
+
+.form-style .field-long {
+    width: 100%;
+}
+.form-style .field-select {
+    width: 100%;
+}
+.form-style .field-textarea {
+    height: 100px;
+}
+.form-style input[type=submit], .form-style input[type=button] {
+    background: #4B99AD;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+}
+.form-style input[type=submit]:hover, .form-style input[type=button]:hover {
+    background: #4691A4;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+.form-style .required {
+    color:red;q
 }
 
 /* -----------------------
