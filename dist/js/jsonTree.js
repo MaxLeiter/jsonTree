@@ -73,6 +73,8 @@ function toArray(o) {
 /** Returns a JSON file in HTML 'syntax' **/
 function json2html(json) {
 	var i, html = "";
+	json = htmlEscape(JSON.stringify(json));
+	json = JSON.parse(json);
 	html += "<ul id='top'>";
 	for (i in json) {
 		html += "<li>"+i+": ";
@@ -85,6 +87,18 @@ function json2html(json) {
 	html += "</ul>";
 	return html;
 }
+
+/** To stop XSS attacks by using JSON with HTML nodes **/
+function htmlEscape(str) {
+    var tagsToReplace = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;'
+    };
+    return str.replace(/[&<>]/g, function(tag) {
+        return tagsToReplace[tag] || tag;
+    });
+};
 
 /** Toggles an elements class **/
 function toggleClass(el, className) {
