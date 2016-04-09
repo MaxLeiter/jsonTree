@@ -1,47 +1,52 @@
 /**
 * By Max Leiter
-* jsonTree: A dependency-free lightweight vanilla Javascript library to display JSON files in an HTML unordered list.
+* jsonTree: A dependency-free lightweight vanilla Javascript library to display JSON in an HTML unordered list.
 **/
 
 /**
-* jsonURL: URL for json file
+* json: URL for json file or a JSON object
 * selector: the elements selector to apply the tree to
 * depth: bool to add a 'depth-#' class, can increase loading times
 **/
-function jsonTree(jsonURL, selector, depth) {
+function jsonTree(json, selector, depth) {
 
-	var element = document.querySelector(selector);
-	if(!element) {
-		console.log('jsonTree element not found!');
-	}
-
-	element.classList.add('jsonTree');
-	var request = new XMLHttpRequest();
-	request.open("GET", jsonURL, true);
-	request.send();
-	request.addEventListener('load', function() {
-		var parsed = JSON.parse(request.responseText);
-		element.innerHTML = json2html(parsed);
-		top = document.querySelectorAll('#top');
-		top.addEventListener('click', function(e) {
-			e.preventDefault();
-			if(e.target && e.target.nodeName == "LI") {
-				if(toArray(e.target.childNodes).length > 1) {
-					toggleClass(e.target, 'selected');
-				}
-			}
+	//It's not a URL, so let's skip the XMLHttpRequest
+	if(typeof json === "object") {
+		generateTree(selector, json);
+	} else {
+		var request = new XMLHttpRequest();
+		request.open("GET", json, true);
+		request.send();
+		request.addEventListener('load', function() {
+			generateTree(selector, JSON.parse(request.responseText));
 		});
-		applyClasses(selector, 'li', 'ul', depth);
-		applyClasses(selector, 'ul', 'li', depth);
-	});
+	}
+	applyClasses(selector, 'li', 'ul', depth);
+	applyClasses(selector, 'ul', 'li', depth);
 }
+
+/** Generate the DOM elements for the tree**/
+function generateTree(selector, json) {
+	var element = document.querySelector(selector);
+	element.classList.add('jsonTree');
+	element.innerHTML = json2html(json);
+	top = document.querySelectorAll('#top');
+	top.addEventListener('click', function(e) {
+		e.preventDefault();
+		if(e.target && e.target.nodeName === "LI") {
+			if(toArray(e.target.childNodes).length > 1) {
+				toggleClass(e.target, 'selected');
+			}
+		}
+	});
+} 
 
 /** Applies classes to the element, including 'parent' and 'depth-#' **/
 function applyClasses(selector, parent, child, depth) {
 	//Parent class
 	var parents = toArray(document.querySelectorAll(selector + ' ' + parent));
 	parents.forEach(function(ele, i, a){
-		var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() == child; });
+		var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child; });
 			if(filter.length > 0) { //its a parent!
 				ele.classList.add('parent');
 				ele.style.cursor = 'pointer';
@@ -90,14 +95,14 @@ function json2html(json) {
 
 /** To stop XSS attacks by using JSON with HTML nodes **/
 function htmlEscape(str) {
-    var tagsToReplace = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;'
-    };
-    return str.replace(/[&<>]/g, function(tag) {
-        return tagsToReplace[tag] || tag;
-    });
+	var tagsToReplace = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;'
+	};
+	return str.replace(/[&<>]/g, function(tag) {
+		return tagsToReplace[tag] || tag;
+	});
 };
 
 /** Toggles an elements class **/
