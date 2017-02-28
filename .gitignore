@@ -1,2 +1,3 @@
 /example/_site
+/node_modules/*
 /_site
