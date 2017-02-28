@@ -46,8 +46,8 @@ function applyClasses(selector, parent, child, depth) {
 	//Parent class
 	var parents = toArray(document.querySelectorAll(selector + ' ' + parent));
 	parents.forEach(function(ele, i, a){
-		var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child; });
-			if(filter.length > 0) { //its a parent!
+			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child.toLowerCase().toString(); });
+			if(filter.length > 0) { // its a parent!
 				ele.classList.add('parent');
 				ele.style.cursor = 'pointer';
 			} else {
