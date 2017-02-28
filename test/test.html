@@ -28,7 +28,7 @@
 	var button = document.querySelector('#exec');
 	button.addEventListener('click', function(e) {
 		e.preventDefault();
-		jsonTree(document.getElementById('json').value, '#example', false);
+		jsonTree.init(document.getElementById('json').value, '#example', false);
 	});
 	document.getElementById('json').value = 'https://raw.githubusercontent.com/KnightOS/knightos.org/gh-pages/documentation/reference/data.json';
 </script>
