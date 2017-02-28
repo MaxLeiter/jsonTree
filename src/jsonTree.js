@@ -33,7 +33,7 @@ function generateTree(selector, json) {
 	top = document.querySelectorAll('#top');
 	top.addEventListener('click', function(e) {
 		e.preventDefault();
-		if(e.target && e.target.nodeName === "LI") {
+		if(e.target && e.target.nodeName.toUpperCase() === "LI") {
 			if(toArray(e.target.childNodes).length > 1) {
 				toggleClass(e.target, 'selected');
 			}
