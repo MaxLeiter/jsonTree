@@ -7,7 +7,8 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "uglifyjs src/jsonTree.js --compress --mangle --output dist/js/jsonTree.min.js && uglifycss src/jsonTree.css > dist/css/jsonTree.min.css"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MaxLeiter/jsonTree/issues"
+  },
+  "dependencies": {
+    "uglify-js": "^2.8.1",
+    "uglifycss": "0.0.25"
   }
 }
