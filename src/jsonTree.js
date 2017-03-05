@@ -12,7 +12,7 @@ var jsonTree = (function() {
 	return { 
 			init: function(json, selector, depth) {
 			//It's not a URL, so let's skip the XMLHttpRequest
-			if(typeof json === "object") {
+			if (typeof json === "object") {
 				generateTree(selector, json);
 			} else {
 				var request = new XMLHttpRequest();
