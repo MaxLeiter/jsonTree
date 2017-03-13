@@ -35,8 +35,8 @@ var jsonTree = (function() {
 		top = document.querySelectorAll('#top');
 		top.addEventListener('click', function(e) {
 			e.preventDefault();
-			if(e.target && e.target.nodeName.toUpperCase() === "LI") {
-				if(toArray(e.target.childNodes).length > 1) {
+			if (e.target && e.target.nodeName.toUpperCase() === "LI") {
+				if (toArray(e.target.childNodes).length > 1) {
 					toggleClass(e.target, 'selected');
 				}
 			}
@@ -49,14 +49,14 @@ var jsonTree = (function() {
 		var parents = toArray(document.querySelectorAll(selector + ' ' + parent));
 		parents.forEach(function(ele, i, a){
 			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child.toLowerCase().toString(); });
-				if(filter.length > 0) { // its a parent!
+				if (filter.length > 0) { // its a parent!
 					ele.classList.add('parent');
 					ele.style.cursor = 'pointer';
 				} else {
 					ele.style.cursor = 'auto';
 				}
 			//The amount of parents, '#top' is assigned by json2html 
-			if(depth) {
+			if (depth) {
 				var count = depth(ele);
 				ele.classList.add('depth-' + count);
 			}
@@ -65,7 +65,7 @@ var jsonTree = (function() {
 
 	/** Returns the amount of parents of an element **/
 	function depth(ele) {
-		if(ele.parentNode && ele.parentNode.getAttribute("data-id") === "top") {
+		if (ele.parentNode && ele.parentNode.getAttribute("data-id") === "top") {
 			return ele == null ? 0 : 1 + depth(ele.parentNode);
 		} else {
 			return 0;
@@ -85,7 +85,7 @@ var jsonTree = (function() {
 		html += "<ul data-id='top'>";
 		for (i in json) {
 			html += "<li>"+i+": ";
-			if(typeof json[i] === "object") {
+			if (typeof json[i] === "object") {
 				html += json2html(json[i]);
 			}
 			else html += json[i];
