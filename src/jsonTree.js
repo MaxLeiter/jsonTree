@@ -109,7 +109,7 @@ var jsonTree = (function() {
 
 	/** Toggles an elements class **/
 	function toggleClass(el, className) {
-		if(el) {
+		if (el) {
 			el.classList.toggle(className);
 		}
 	}
