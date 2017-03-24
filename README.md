@@ -4,7 +4,7 @@ A lightweight vanilla Javascript micro-library for making collapsible trees with
 ## usage
 
   ```
-  jsonTree(object, selector, depth)
+  jsonTree.init(object, selector, depth);
   ```
 
 Because jsonTree uses document.querySelector(selector), selector can either be an ID or class, just be sure to specify with the proper identifier (. for class and # for ID).
