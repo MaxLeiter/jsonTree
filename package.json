@@ -1,6 +1,6 @@
 {
   "name": "jsontreejs",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "a lightweight dependency free javascript micro-library",
   "main": "dist/jsonTree.js",
   "directories": {
@@ -20,12 +20,12 @@
     "tree"
   ],
   "author": "Max Leiter <mleiter18@priorypanther.com> (http://maxleiter.github.io/)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MaxLeiter/jsonTree/issues"
   },
   "dependencies": {
     "uglify-js": "^2.8.1",
-    "uglifycss": "0.0.25"
+    "uglifycss": "^0.0.25"
   }
 }
