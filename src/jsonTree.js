@@ -50,7 +50,6 @@ var jsonTree = (function() {
 			e.preventDefault();
 			if (e.target && e.target.nodeName.toUpperCase() === "LI") {
 				if (toArray(e.target.childNodes).length > 1) {
-					console.log("yeah")
 					toggleClass(e.target, "selected");
 				}
 			}
