@@ -16,16 +16,16 @@ var jsonTree = (function() {
 			// It's not a URL, so let's skip the XMLHttpRequest
 			if (typeof json === "object") {
 				generateTree(selector, json);
+				classify(selector, depth);
 			} else {
 				var request = new XMLHttpRequest();
 				request.open("GET", json, true);
 				request.send();
 				request.addEventListener("load", function() {
 					generateTree(selector, JSON.parse(request.responseText));
+					classify(selector, depth);
 				});
 			}
-			applyClasses(selector, "li", "ul", depth);
-			applyClasses(selector, "ul", "li", depth);
 		}
 	}
 
@@ -50,29 +50,33 @@ var jsonTree = (function() {
 			e.preventDefault();
 			if (e.target && e.target.nodeName.toUpperCase() === "LI") {
 				if (toArray(e.target.childNodes).length > 1) {
+					console.log("yeah")
 					toggleClass(e.target, "selected");
 				}
 			}
 		});
 	}
 
+	function classify(selector, depth) {
+		applyClasses(selector, "li", "ul", depth);
+		applyClasses(selector, "ul", "li", depth);
+	}
+
 	/** Applies classes to the element, including "parent" and "depth-#" **/
 	function applyClasses(selector, parent, child, depth) {
-		// Parent class
 		var parents = toArray(document.querySelectorAll(selector + " " + parent));
-		parents.forEach(function(ele, i, a){
-			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child.toLowerCase().toString(); });
+		parents.forEach(function(element){
+			var filter = toArray(element.children).filter(function(el) { return el.tagName.toLowerCase() === child.toLowerCase().toString(); });
 				if (filter.length > 0) { // It's a parent!
-					console.log("parent")
-					ele.classList.add("parent");
-					ele.style.cursor = "pointer";
+					element.classList.add("parent");
+					element.style.cursor = "pointer";
 				} else {
-					ele.style.cursor = "auto";
+					element.style.cursor = "auto";
 				}
-			//T he amount of parents, "#top" is assigned by json2html
+			// The amount of parents, "#top" is assigned by json2html
 			if (depth) {
-				var count = depth(ele);
-				ele.classList.add("depth-" + count);
+				var count = depth(element);
+				element.classList.add("depth-" + count);
 			}
 		});
 	}
