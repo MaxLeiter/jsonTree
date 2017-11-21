@@ -7,58 +7,72 @@ var jsonTree = (function() {
 	/**
 	* json: URL for json file or a JSON object
 	* selector: the elements selector to apply the tree to
-	* depth: bool to add a 'depth-#' class, can increase loading times
+	* depth: bool to add a "depth-#" class, can increase loading times
 	**/
-	return { 
-			init: function(json, selector, depth) {
-			//It's not a URL, so let's skip the XMLHttpRequest
+	return {
+		init: function(json, selector, depth) {
+			classList();
+
+			// It's not a URL, so let's skip the XMLHttpRequest
 			if (typeof json === "object") {
 				generateTree(selector, json);
 			} else {
 				var request = new XMLHttpRequest();
 				request.open("GET", json, true);
 				request.send();
-				request.addEventListener('load', function() {
+				request.addEventListener("load", function() {
 					generateTree(selector, JSON.parse(request.responseText));
 				});
 			}
-			applyClasses(selector, 'li', 'ul', depth);
-			applyClasses(selector, 'ul', 'li', depth);
+			applyClasses(selector, "li", "ul", depth);
+			applyClasses(selector, "ul", "li", depth);
 		}
+	}
+
+	/* classList.js for old browsers */
+	function classList() {
+		/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
+		"document"in self&&("classList"in document.createElement("_")&&(!document.createElementNS||"classList"in document.createElementNS("http://www.w3.org/2000/svg","g"))||function(a){if("Element"in a){a=a.Element.prototype;var h=Object,l=String.prototype.trim||function(){return this.replace(/^\s+|\s+$/g,"")},n=Array.prototype.indexOf||function(c){for(var b=0,k=this.length;b<k;b++)if(b in this&&this[b]===c)return b;return-1},f=function(c,b){this.name=c;this.code=DOMException[c];this.message=b},e=function(c,
+		b){if(""===b)throw new f("SYNTAX_ERR","The token must not be empty.");if(/\s/.test(b))throw new f("INVALID_CHARACTER_ERR","The token must not contain space characters.");return n.call(c,b)},g=function(c){var b=l.call(c.getAttribute("class")||"");b=b?b.split(/\s+/):[];for(var k=0,e=b.length;k<e;k++)this.push(b[k]);this._updateClassName=function(){c.setAttribute("class",this.toString())}},d=g.prototype=[],m=function(){return new g(this)};f.prototype=Error.prototype;d.item=function(c){return this[c]||
+		null};d.contains=function(c){return!~e(this,c+"")};d.add=function(){var c=arguments,b=0,k=c.length,d=!1;do{var a=c[b]+"";~e(this,a)&&(this.push(a),d=!0)}while(++b<k);d&&this._updateClassName()};d.remove=function(){var c=arguments,b=0,d=c.length,a=!1,f;do{var g=c[b]+"";for(f=e(this,g);~f;)this.splice(f,1),a=!0,f=e(this,g)}while(++b<d);a&&this._updateClassName()};d.toggle=function(c,b){var a=this.contains(c),d=a?!0!==b&&"remove":!1!==b&&"add";if(d)this[d](c);return!0===b||!1===b?b:!a};d.replace=function(c,
+		b){var a=e(c+"");~a&&(this.splice(a,1,b),this._updateClassName())};d.toString=function(){return this.join(" ")};if(h.defineProperty){d={get:m,enumerable:!0,configurable:!0};try{h.defineProperty(a,"classList",d)}catch(c){if(void 0===c.number||-2146823252===c.number)d.enumerable=!1,h.defineProperty(a,"classList",d)}}else h.prototype.__defineGetter__&&a.__defineGetter__("classList",m)}}(self),function(){var a=document.createElement("_");a.classList.add("c1","c2");if(!a.classList.contains("c2")){var h=
+		function(a){var f=DOMTokenList.prototype[a];DOMTokenList.prototype[a]=function(a){var e,d=arguments.length;for(e=0;e<d;e++)a=arguments[e],f.call(this,a)}};h("add");h("remove")}a.classList.toggle("c3",!1);if(a.classList.contains("c3")){var l=DOMTokenList.prototype.toggle;DOMTokenList.prototype.toggle=function(a,f){return 1 in arguments&&!this.contains(a)===!f?f:l.call(this,a)}}"replace"in document.createElement("_").classList||(DOMTokenList.prototype.replace=function(a,f){var e=this.toString().split(" "),
+		g=e.indexOf(a+"");~g&&(e=e.slice(g),this.remove.apply(this,e),this.add(f),this.add.apply(this,e.slice(1)))});a=null}());
 	}
 
 	/** Generate the DOM elements for the tree**/
 	function generateTree(selector, json) {
 		var element = document.querySelector(selector);
-		element.classList.add('jsonTree');
+		element.classList.add("jsonTree");
 		element.innerHTML = json2html(json);
-		top = document.querySelectorAll('#top');
-		top.addEventListener('click', function(e) {
+		top = document.querySelectorAll("#top");
+		top.addEventListener("click", function(e) {
 			e.preventDefault();
 			if (e.target && e.target.nodeName.toUpperCase() === "LI") {
 				if (toArray(e.target.childNodes).length > 1) {
-					toggleClass(e.target, 'selected');
+					toggleClass(e.target, "selected");
 				}
 			}
 		});
-	} 
+	}
 
-	/** Applies classes to the element, including 'parent' and 'depth-#' **/
+	/** Applies classes to the element, including "parent" and "depth-#" **/
 	function applyClasses(selector, parent, child, depth) {
-		//Parent class
-		var parents = toArray(document.querySelectorAll(selector + ' ' + parent));
+		// Parent class
+		var parents = toArray(document.querySelectorAll(selector + " " + parent));
 		parents.forEach(function(ele, i, a){
 			var filter = toArray(ele.children).filter(function(el) { return el.tagName.toLowerCase() === child.toLowerCase().toString(); });
-				if (filter.length > 0) { // its a parent!
-					ele.classList.add('parent');
-					ele.style.cursor = 'pointer';
+				if (filter.length > 0) { // It's a parent!
+					console.log("parent")
+					ele.classList.add("parent");
+					ele.style.cursor = "pointer";
 				} else {
-					ele.style.cursor = 'auto';
+					ele.style.cursor = "auto";
 				}
-			//The amount of parents, '#top' is assigned by json2html 
+			//T he amount of parents, "#top" is assigned by json2html
 			if (depth) {
 				var count = depth(ele);
-				ele.classList.add('depth-' + count);
+				ele.classList.add("depth-" + count);
 			}
 		});
 	}
@@ -77,12 +91,12 @@ var jsonTree = (function() {
 		return Array.prototype.slice.call(o);
 	}
 
-	/** Returns a JSON file in HTML 'syntax' **/
+	/** Returns a JSON file in HTML tokens **/
 	function json2html(json) {
 		var i, html = "";
 		json = htmlEscape(JSON.stringify(json));
 		json = JSON.parse(json);
-		html += "<ul data-id='top'>";
+		html += "<ul data-id=\"top\">";
 		for (i in json) {
 			html += "<li>"+i+": ";
 			if (typeof json[i] === "object") {
@@ -98,9 +112,9 @@ var jsonTree = (function() {
 	/** To stop XSS attacks by using JSON with HTML nodes **/
 	function htmlEscape(str) {
 		var tagsToReplace = {
-			'&': '&amp;',
-			'<': '&lt;',
-			'>': '&gt;'
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;"
 		};
 		return str.replace(/[&<>]/g, function(tag) {
 			return tagsToReplace[tag] || tag;
@@ -113,7 +127,5 @@ var jsonTree = (function() {
 			el.classList.toggle(className);
 		}
 	}
-	/* classList.js for old browsers */
-	/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
-	if("document" in self){if(!("classList" in document.createElement("_"))){(function(j){"use strict";if(!("Element" in j)){return}var a="classList",f="prototype",m=j.Element[f],b=Object,k=String[f].trim||function(){return this.replace(/^\s+|\s+$/g,"")},c=Array[f].indexOf||function(q){var p=0,o=this.length;for(;p<o;p++){if(p in this&&this[p]===q){return p}}return -1},n=function(o,p){this.name=o;this.code=DOMException[o];this.message=p},g=function(p,o){if(o===""){throw new n("SYNTAX_ERR","An invalid or illegal string was specified")}if(/\s/.test(o)){throw new n("INVALID_CHARACTER_ERR","String contains an invalid character")}return c.call(p,o)},d=function(s){var r=k.call(s.getAttribute("class")||""),q=r?r.split(/\s+/):[],p=0,o=q.length;for(;p<o;p++){this.push(q[p])}this._updateClassName=function(){s.setAttribute("class",this.toString())}},e=d[f]=[],i=function(){return new d(this)};n[f]=Error[f];e.item=function(o){return this[o]||null};e.contains=function(o){o+="";return g(this,o)!==-1};e.add=function(){var s=arguments,r=0,p=s.length,q,o=false;do{q=s[r]+"";if(g(this,q)===-1){this.push(q);o=true}}while(++r<p);if(o){this._updateClassName()}};e.remove=function(){var t=arguments,s=0,p=t.length,r,o=false,q;do{r=t[s]+"";q=g(this,r);while(q!==-1){this.splice(q,1);o=true;q=g(this,r)}}while(++s<p);if(o){this._updateClassName()}};e.toggle=function(p,q){p+="";var o=this.contains(p),r=o?q!==true&&"remove":q!==false&&"add";if(r){this[r](p)}if(q===true||q===false){return q}else{return !o}};e.toString=function(){return this.join(" ")};if(b.defineProperty){var l={get:i,enumerable:true,configurable:true};try{b.defineProperty(m,a,l)}catch(h){if(h.number===-2146823252){l.enumerable=false;b.defineProperty(m,a,l)}}}else{if(b[f].__defineGetter__){m.__defineGetter__(a,i)}}}(self))}else{(function(){var b=document.createElement("_");b.classList.add("c1","c2");if(!b.classList.contains("c2")){var c=function(e){var d=DOMTokenList.prototype[e];DOMTokenList.prototype[e]=function(h){var g,f=arguments.length;for(g=0;g<f;g++){h=arguments[g];d.call(this,h)}}};c("add");c("remove")}b.classList.toggle("c3",false);if(b.classList.contains("c3")){var a=DOMTokenList.prototype.toggle;DOMTokenList.prototype.toggle=function(d,e){if(1 in arguments&&!this.contains(d)===!e){return e}else{return a.call(this,d)}}}b=null}())}};
 })();
+

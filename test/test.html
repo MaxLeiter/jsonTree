@@ -12,25 +12,25 @@
 
 	<form>
 		<ul class="form-style">
-			<label>JSON URL <span class="required"></span></label> 
-			<input type="url" name="url" class="field-divided" id="json" placeholder="URL" /> 
-			<input type="button" id='exec' value="Execute">
+			<label>JSON URL <span class="required"></span></label>
+			<input type="url" name="url" class="field-divided" id="json" placeholder="URL" />
+			<input type="button" id="exec" value="Execute">
 		</ul>
 	</form>
 
-	<div id='example'>
+	<div id="example">
 	</div>
 
 </div>
 <script src="../src/jsonTree.js"></script>
 
-<script type='text/javascript'>
-	var button = document.querySelector('#exec');
-	button.addEventListener('click', function(e) {
+<script type="text/javascript">
+	var button = document.querySelector("#exec");
+	button.addEventListener("click", function(e) {
 		e.preventDefault();
-		jsonTree.init(document.getElementById('json').value, '#example', false);
+		jsonTree.init(document.getElementById("json").value, "#example", false);
 	});
-	document.getElementById('json').value = 'https://raw.githubusercontent.com/KnightOS/knightos.org/gh-pages/documentation/reference/data.json';
+	document.getElementById("json").value = "https://raw.githubusercontent.com/KnightOS/knightos.org/gh-pages/documentation/reference/data.json";
 </script>
 
 </body>
