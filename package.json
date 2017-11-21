@@ -1,14 +1,14 @@
 {
   "name": "jsontreejs",
-  "version": "1.6.1",
+  "version": "3.0.0",
   "description": "a lightweight dependency free javascript micro-library",
-  "main": "dist/jsonTree.js",
+  "main": "dist/js/jsonTree.min.js",
   "directories": {
-    "example": "example"
+    "test": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "uglifyjs src/jsonTree.js --compress unused=false --mangle --output dist/js/jsonTree.min.js && uglifycss src/jsonTree.css > dist/css/jsonTree.min.css"
+    "build": "./node_modules/uglify-es/bin/uglifyjs src/jsonTree.js --compress unused=false --mangle --output dist/js/jsonTree.min.js && uglifycss src/jsonTree.css > dist/css/jsonTree.min.css"
   },
   "repository": {
     "type": "git",
@@ -19,13 +19,13 @@
     "jsonTree",
     "tree"
   ],
-  "author": "Max Leiter <mleiter18@priorypanther.com> (http://maxleiter.github.io/)",
+  "author": "Max Leiter <mleiter18@priorypanther.com> (https://maxleiter.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MaxLeiter/jsonTree/issues"
   },
   "devDependencies": {
-    "uglify-js": "^3.1.10",
+    "uglify-es": "3.1.10",
     "uglifycss": "0.0.27"
   }
 }
