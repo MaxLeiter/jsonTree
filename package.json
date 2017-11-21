@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "uglifyjs src/jsonTree.js --compress unused=false --mangle --output dist/js/jsonTree.min.js && uglifycss src/jsonTree.css > dist/css/jsonTree.min.css"
+    "build": "./node_modules/uglify-es/bin/uglifyjs src/jsonTree.js --compress unused=false --mangle --output dist/js/jsonTree.min.js && uglifycss src/jsonTree.css > dist/css/jsonTree.min.css"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "url": "https://github.com/MaxLeiter/jsonTree/issues"
   },
   "devDependencies": {
-    "uglify-js": "^3.1.10",
+    "uglify-es": "^3.1.10",
     "uglifycss": "0.0.27"
   }
 }
