@@ -1,10 +1,10 @@
 {
   "name": "jsontreejs",
-  "version": "1.6.1",
+  "version": "3.0.0",
   "description": "a lightweight dependency free javascript micro-library",
   "main": "dist/jsonTree.js",
   "directories": {
-    "example": "example"
+    "test": "test"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
